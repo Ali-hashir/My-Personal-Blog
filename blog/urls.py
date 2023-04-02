@@ -14,5 +14,6 @@ urlpatterns = [
     path('edit_blog/<int:id>', edit_blog, name='edit_blog'),
     # search with string
     path('search/', search, name='search'),
-
+    # about
+    path('about/',about , name='about'),
 ]
