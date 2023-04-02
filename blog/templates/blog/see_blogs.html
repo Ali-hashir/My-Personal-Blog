@@ -1,0 +1,80 @@
+<section class="mt-5 pt-5">
+    <div class="container-fluid">
+      <!-- <div class="logo"><a href="/"><img src="/media/images/logo.png"></a></div> -->
+      <div class="logo">
+          <row style="display: inline-flex;">
+              <div class="col-md-3" style="
+              position: absolute;
+              left: 0px;
+          " >    
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                    <a class="btn btn-info" href="{% url 'add_blog' %}">Add Blogs</a>
+                  </li>
+                  {% endif %}
+              </div>
+              <div class="col-md-6">
+                <a class="navbar-brand py-1" href="/">
+                  <h3 style="color: black !important;">Your Personal Blog</h3>
+                </a>
+              </div>
+              <div class="col-md-3" style="
+              position: absolute;
+              right: 0px;
+          " >
+                <div class="" id="">
+      
+                  <ul class="navbar-nav ml-auto">
+                    
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                      <a class="btn btn-danger" href="{% url 'logout_view' %}">Logout</a>
+                    </li>
+      
+                    {% else %}
+                    <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
+                      <a class="btn btn-primary" href="{% url 'login_view' %}">Add Blog</a>
+                    </li>
+      
+                    {% endif %}
+      
+                  </ul>
+                </div>
+            </div>
+            </row>
+      </div>
+      
+   </div>
+  
+      <div class="container">
+         
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Blog title</th>
+              <th scope="col">Created at</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for blog in blog_objs %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{blog.title}}</td>
+              <td>{{blog.created_at}}</td>
+              <td>
+                  <a href="{%  url 'blog_update' blog.slug %}" class="btn btn-success">Update</a>
+                  <a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger">Delete</a>
+  
+  
+              </td>
+            </tr>
+            {% endfor %}
+           
+  
+            </tbody>
+            </table>
+            
+      </div>
+  </section>
