@@ -103,3 +103,15 @@ def edit_blog(request, id):
         blog = Post.objects.get(id=id)
         context = {'blog': blog}
         return render(request, 'blog/edit_blog.html', context)
+    
+
+# search
+def search(request):
+    # GET
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        # search in tags
+        posts = Post.objects.filter(tags__icontains=query)
+        context = {'blogs': posts}
+        return render(request, 'blog/index.html', context)
+    

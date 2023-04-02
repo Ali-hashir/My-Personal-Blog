@@ -127,6 +127,20 @@
       <!-- banner section end -->
    </div>
 
+   <!-- make a search bar with search button make it a form -->
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <form action="{% url 'search' %}" method="GET">
+               <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Search" name="search">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
    <section class="py-6">
       <div class="container">
         <div class="row mb-5">

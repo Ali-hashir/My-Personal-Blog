@@ -12,4 +12,7 @@ urlpatterns = [
     path('see_blogs/<int:id>', see_blog, name='see_blog'),
     # edit_blog
     path('edit_blog/<int:id>', edit_blog, name='edit_blog'),
+    # search with string
+    path('search/', search, name='search'),
+
 ]
