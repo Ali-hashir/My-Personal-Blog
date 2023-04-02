@@ -6,7 +6,7 @@ from .helper import *
 class Post(models.Model):
     title = models.CharField(max_length=200)
     tags = models.CharField(max_length=200)
-    content = FroalaField()
+    content = models.TextField()
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     image = models.ImageField(upload_to='blog')
     created_date = models.DateTimeField(auto_now_add=True)

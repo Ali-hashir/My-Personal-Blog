@@ -1,8 +1,11 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from blog.models import Post
 
 
 
@@ -35,3 +38,9 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('home')
+
+def getLatestPosts(request):
+    posts = Post.objects.all().order_by('-created_date')[:1]
+    # return as ajax response
+    return JsonResponse({'posts': list(posts.values())})
+    

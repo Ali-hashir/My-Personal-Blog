@@ -31,7 +31,6 @@
    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Righteous&display=swap" rel="stylesheet">
    <!-- owl stylesheets -->
    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
-   <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
    <meta charset="utf-8">
@@ -52,13 +51,11 @@
    <link rel="stylesheet" href="{% static 'css/magnific-popup.css'%}">
    <!-- theme stylesheet-->
    <link rel="stylesheet" href="{% static 'css/default.css'%}" id="theme-stylesheet">
-   <!-- Custom stylesheet - for your changes-->
-   <link rel="stylesheet" href="{% static 'css/custom.css'%}">
-   <script src="{% static 'js/main.js'%}"> </script>
 
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -118,10 +115,10 @@
          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                <div class="carousel-item active">
-                  <div class="container">
+                  <div class="container" style="text-align: center;">
                      <h1 class="banner_taital placeholder-glow placeholder"> </h1>
                      <p class="banner_text placeholder-glow placeholder"></p>
-                     <div class="read_bt"><a href="#">Get A Quote</a></div>
+                     <div class="read_bt"><a href="#">Loading</a></div>
                   </div>
                </div>
             </div>
@@ -158,3 +155,32 @@
    </div>
 
 </html>
+
+<script>
+   //document ready function
+   $(document).ready(function () {  
+      console.log("ready!");
+     $.ajax({
+         url: "{% url 'getLatestPosts' %}",
+         type: "GET",
+         dataType: "json",
+         success: function(data) {
+            console.log(data);
+            console.log(data.posts[0].title);
+
+            $('.banner_taital').removeClass('placeholder-glow placeholder');
+            $('.banner_taital').text(data.posts[0].title);
+
+            $('.banner_text').removeClass('placeholder-glow placeholder');
+            var content = data.posts[0].content;
+            if (content.length > 150) {
+               content = content.substring(0, 150) + '...';
+            }
+            $('.banner_text').text(content);
+            $('.read_bt').html('<a href="">Read More</a>');
+            
+            
+         }
+     })
+   });
+</script>
