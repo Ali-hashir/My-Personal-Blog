@@ -7,7 +7,34 @@ from django.contrib import messages
 
 from blog.models import Post
 
+def edit_blog(request, id):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('description')
+        picture = request.FILES.get('image', '')
+        # save to database
+        post = Post.objects.get(id=id)
+        post.title = title
+        post.content = content
+        if picture!="":
+            post.image = picture
+        post.slug = title.replace(' ', '-')
+        post.tags = title
+        post.save()
+        return redirect('home')
+    else:
+        # get blog by id
+        blog = Post.objects.get(id=id)
+        context = {'blog': blog}
+        return render(request, 'blog/edit_blog.html', context)
 
+# delete
+def delete(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    posts = Post.objects.all().order_by('-created_date')
+    context = {'blogs': posts}
+    return render(request, 'blog/index.html', context)
 
 def home(request):
     # get all posts

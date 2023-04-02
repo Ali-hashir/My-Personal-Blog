@@ -16,4 +16,6 @@ urlpatterns = [
     path('search/', search, name='search'),
     # about
     path('about/',about , name='about'),
+    # delete
+    path('delete/<int:id>',delete , name='delete'),
 ]
