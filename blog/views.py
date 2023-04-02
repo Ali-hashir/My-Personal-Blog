@@ -13,8 +13,8 @@ def loginPage(request):
     logout(request)
 
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('loginUsername')
+        password = request.POST.get('loginPassword')
 
         try:
             user = User.objects.get(username=username)
@@ -31,3 +31,7 @@ def loginPage(request):
             
     context = {}
     return render(request, 'blog/login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
