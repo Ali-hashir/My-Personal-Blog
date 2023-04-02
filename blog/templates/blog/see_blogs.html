@@ -110,7 +110,7 @@
     {% if request.user.is_authenticated %}
     <div class="row">
       <div class="col-md-12">
-        <a style="float: left; margin-left: 120px;" class="btn btn-danger" href="{% url 'edit_blog' blog.id %}">Delete
+        <a style="float: left; margin-left: 120px;" class="btn btn-danger" href="{% url 'delete' blog.id %}">Delete
           Blog</a>
         <a class="btn btn-primary" href="{% url 'edit_blog' blog.id %}">EditBlog</a>
         <a style="float: right; margin-right: 120px;" class="btn btn-info" href="{% url 'home' %}">Home</a>
