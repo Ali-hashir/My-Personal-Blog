@@ -8,7 +8,7 @@ class Post(models.Model):
     tags = models.CharField(max_length=200)
     content = models.TextField()
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
-    image = models.ImageField(upload_to='blog')
+    image = models.ImageField(upload_to='static/media/')
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 

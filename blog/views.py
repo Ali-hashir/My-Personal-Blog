@@ -10,7 +10,10 @@ from blog.models import Post
 
 
 def home(request):
-    return render(request, 'blog/index.html')
+    # get all posts
+    posts = Post.objects.all().order_by('-created_date')
+    context = {'blogs': posts}
+    return render(request, 'blog/index.html', context)
 
 def loginPage(request):
     logout(request)
