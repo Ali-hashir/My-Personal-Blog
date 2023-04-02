@@ -52,6 +52,7 @@ def add_blog(request):
         title = request.POST.get('title')
         content = request.POST.get('description')
         picture = request.FILES.get('image', '')
+        tags = request.POST.get('tags')
         # save to database
         post = Post.objects.create(
             title=title,
@@ -60,7 +61,7 @@ def add_blog(request):
             image=picture,
 
             slug=title.replace(' ', '-'),
-            tags=title
+            tags=tags
         )
 
         # save image in media folder
