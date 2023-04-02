@@ -67,7 +67,7 @@
                   <div class="col-md-3" style="position: absolute; left: 0px;">
                      {% if request.user.is_authenticated %}
                      <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block">
-                        <a class="btn btn-info" href="">Add Blogs</a>
+                        <a class="btn btn-info" href="{% url 'add_blog' %}">Add Blogs</a>
                      </li>
                      {% endif %}
                   </div>
@@ -138,7 +138,9 @@
                 <img class="img-fluid card-img-top" src="/{{blog.image}}" alt="..."></a>
               <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#">
                 {{request.user.username}} </a>
-                <h5 class="my-2"><a class="text-dark" href="">
+                <h5 class="my-2">
+                  <!-- make an anchor tag which routs to see_blog and sends id with it -->
+                  <a href="{% url 'see_blog' blog.id %}">
                  {{blog.title}}          </a></h5>
                 <p class="text-gray-500 text-sm my-3"><i class="far fa-clock mr-2"></i>
                   {{blog.content|truncatechars:100}}
